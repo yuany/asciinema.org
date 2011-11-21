@@ -1,26 +1,43 @@
 SP.Terminal = function(cols, lines) {
+  this.element = $(".player .term");
+
   this.cols = cols;
   this.lines = lines;
-  this.cursorLine = 0;
-  this.cursorCol = 0;
+
+  this.cursorX = 0;
+  this.cursorY = 0;
+
   this.normalBuffer = [];
   this.alternateBuffer = [];
   this.lineData = this.normalBuffer;
-  this.fg = this.bg = undefined;
   this.dirtyLines = [];
-  this.initialize();
+
+  this.fg = this.bg = undefined;
+
+  this.createChildElements();
+  this.showCursor(true);
+
+  // this.updateScreen();
+  // this.render();
+
+  // this.renderLine(0); // we only need 1 line
+  // this.element.css({ width: this.element.width(), height: this.element.height() });
 };
 
 SP.Terminal.prototype = {
-  initialize: function() {
-    var container = $(".player .term");
-    this.element = container;
-    this.renderLine(0); // we only need 1 line
-    this.element.css({ width: this.element.width(), height: this.element.height() * this.lines });
+  createChildElements: function() {
+    for (var i = 0; i < this.lines; i++) {
+      var row = $('<span class="line">');
+      this.element.append(row);
+      this.element.append("\n");
+    }
   },
 
   getLine: function(n) {
-    n = (typeof n != "undefined" ? n : this.cursorLine);
+    n = (typeof n != "undefined" ? n : this.cursorY);
+
+    if (n >= this.lines)
+      throw 'cant getLine ' + n;
 
     var line = this.lineData[n];
 
@@ -33,9 +50,9 @@ SP.Terminal.prototype = {
   },
 
   clearScreen: function() {
-    this.lineData.length = 0;
-    this.cursorLine = this.cursorCol = 0;
-    this.element.empty();
+    // this.lineData.length = 0;
+    this.cursorY = this.cursorX = 0;
+    this.element.find(".line").empty();
   },
 
   switchToNormalBuffer: function() {
@@ -51,23 +68,14 @@ SP.Terminal.prototype = {
   renderLine: function(n) {
     var html = this.getLine(n);
 
-    if (n == this.cursorLine) {
-      html = html.slice(0, this.cursorCol).concat(['<span class="cursor">' + (html[this.cursorCol] || '') + "</span>"], html.slice(this.cursorCol + 1) || []);
-    }
-
-    var missingLines = this.lineData.length - this.element.find('.line').length;
-
-    for (var i = 0; i < missingLines; i++) {
-      var row = $('<span class="line">');
-      this.element.append(row);
-      this.element.append("\n");
-      this.element.scrollTop(100000);//row.offset().top);
+    if (n == this.cursorY) {
+      html = html.slice(0, this.cursorX).concat(['<span class="cursor">' + (html[this.cursorX] || '') + "</span>"], html.slice(this.cursorX + 1) || []);
     }
 
     this.element.find(".line:eq(" + n + ")").html(html.join(''));
   },
 
-  renderDirtyLines: function() {
+  render: function() {
     var updated = [];
 
     for (var i=0; i<this.dirtyLines.length; i++) {
@@ -82,15 +90,23 @@ SP.Terminal.prototype = {
   },
 
   updateLine: function(n) {
-    n = (typeof n != "undefined" ? n : this.cursorLine);
+    n = (typeof n != "undefined" ? n : this.cursorY);
     this.dirtyLines.push(n);
   },
 
   updateScreen: function() {
     this.dirtyLines = [];
 
-    for (var l=0; l<this.lineData.length; l++) {
+    for (var l=0; l<this.lines; l++) {
       this.dirtyLines.push(l);
+    }
+  },
+
+  showCursor: function(show) {
+    if (show) {
+      this.element.addClass('cursor-on');
+    } else {
+      this.element.removeClass('cursor-on');
     }
   },
 
@@ -124,54 +140,59 @@ SP.Terminal.prototype = {
   setCursorPos: function(line, col) {
     line -= 1;
     col -= 1;
-    var oldLine = this.cursorLine;
-    this.cursorLine = line;
-    this.cursorCol = col;
+    var oldLine = this.cursorY;
+    this.cursorY = line;
+    this.cursorX = col;
     this.updateLine(oldLine);
     this.updateLine();
   },
 
   saveCursor: function() {
-    this.savedCol = this.cursorCol;
-    this.savedLine = this.cursorLine;
+    this.savedCol = this.cursorX;
+    this.savedLine = this.cursorY;
   },
 
   restoreCursor: function() {
-    var oldLine = this.cursorLine;
+    var oldLine = this.cursorY;
 
-    this.cursorLine = this.savedLine;
-    this.cursorCol = this.savedCol;
+    this.cursorY = this.savedLine;
+    this.cursorX = this.savedCol;
 
     this.updateLine(oldLine);
     this.updateLine();
   },
 
   cursorLeft: function() {
-    if (this.cursorCol > 0) {
-      this.cursorCol -= 1;
+    if (this.cursorX > 0) {
+      this.cursorX -= 1;
       this.updateLine();
     }
   },
 
   cursorRight: function() {
-    if (this.cursorCol < this.cols) {
-      this.cursorCol += 1;
+    if (this.cursorX < this.cols) {
+      this.cursorX += 1;
       this.updateLine();
     }
   },
 
   cursorUp: function() {
-    if (this.cursorLine > 0) {
-      this.cursorLine -= 1;
-      this.updateLine(this.cursorLine);
-      this.updateLine(this.cursorLine+1);
+    if (this.cursorY > 0) {
+      this.cursorY -= 1;
+      this.updateLine(this.cursorY);
+      this.updateLine(this.cursorY+1);
     }
   },
 
   cursorDown: function() {
-    this.cursorLine += 1;
-    this.updateLine(this.cursorLine);
-    this.updateLine(this.cursorLine-1);
+    if (this.cursorY + 1 < this.lines) {
+      this.cursorY += 1;
+      this.updateLine(this.cursorY-1);
+      this.updateLine(this.cursorY);
+    } else {
+      this.lineData.splice(0, 1);
+      this.updateScreen();
+    }
   },
 
   cursorForward: function(n) {
@@ -183,14 +204,14 @@ SP.Terminal.prototype = {
   },
 
   cr: function() {
-    this.cursorCol = 0;
+    this.cursorX = 0;
     this.updateLine();
   },
 
   bs: function() {
-    if (this.cursorCol > 0) {
-      this.getLine()[this.cursorCol - 1] = ' ';
-      this.cursorCol -= 1;
+    if (this.cursorX > 0) {
+      this.getLine()[this.cursorX - 1] = ' ';
+      this.cursorX -= 1;
       this.updateLine();
     }
   },
@@ -199,13 +220,13 @@ SP.Terminal.prototype = {
     text = Utf8.decode(text);
 
     for (var i=0; i<text.length; i++) {
-      if (this.cursorCol >= this.cols) {
-        this.cursorLine += 1;
-        this.cursorCol = 0;
+      if (this.cursorX >= this.cols) {
+        this.cursorY += 1;
+        this.cursorX = 0;
       }
 
-      this.fill(this.cursorLine, this.cursorCol, 1, text[i]);
-      this.cursorCol += 1;
+      this.fill(this.cursorY, this.cursorX, 1, text[i]);
+      this.cursorX += 1;
     }
 
     this.updateLine();
@@ -214,19 +235,19 @@ SP.Terminal.prototype = {
   eraseData: function(n) {
     if (n == 0) {
       this.eraseLine(0);
-      for (var l=this.cursorLine+1; l<this.lineData.length; l++) {
-        this.lineData[l] = [];
+      for (var l=this.cursorY+1; l<this.lines; l++) {
+        this.clearLineData(l);
         this.updateLine(l);
       }
     } else if (n == 1) {
-      for (var l=0; l<this.cursorLine; l++) {
-        this.lineData[l] = [];
+      for (var l=0; l<this.cursorY; l++) {
+        this.clearLineData(l);
         this.updateLine(l);
       }
       this.eraseLine(n);
     } else if (n == 2) {
-      for (var l=0; l<this.lineData.length; l++) {
-        this.lineData[l] = [];
+      for (var l=0; l<this.lines; l++) {
+        this.clearLineData(l);
         this.updateLine(l);
       }
     }
@@ -234,26 +255,46 @@ SP.Terminal.prototype = {
 
   eraseLine: function(n) {
     if (n == 0) {
-      this.fill(this.cursorLine, this.cursorCol, this.cols - this.cursorCol, ' ');
-      // this.lineData[this.cursorLine] = this.lineData[this.cursorLine].slice(0, this.cursorCol);
-      // this.lineData[this.cursorLine] = this.lineData[this.cursorLine].slice(0, this.cursorCol) + " ".times(this.cols - this.cursorCol);
+      this.fill(this.cursorY, this.cursorX, this.cols - this.cursorX, ' ');
       this.updateLine();
     } else if (n == 1) {
-      this.fill(this.cursorLine, 0, this.cursorCol, ' ');
-      // this.lineData[this.cursorLine] = " ".times(this.cursorCol).split('').concat(this.lineData[this.cursorLine].slice(this.cursorCol));
-      // this.lineData[this.cursorLine] = " ".times(this.cursorCol) + this.lineData[this.cursorLine].slice(this.cursorCol);
+      this.fill(this.cursorY, 0, this.cursorX, ' ');
       this.updateLine();
     } else if (n == 2) {
-      this.fill(this.cursorLine, 0, this.cols, ' ');
-      // this.lineData[this.cursorLine] = [] // " ".times(this.cols);
+      this.fill(this.cursorY, 0, this.cols, ' ');
       this.updateLine();
     }
   },
 
+  clearLineData: function(n) {
+    this.fill(n, 0, this.cols, ' ');
+  },
+
   reserveCharacters: function(n) {
     var line = this.getLine();
-    this.lineData[this.cursorLine] = line.slice(0, this.cursorCol).concat(" ".times(n).split(''), line.slice(this.cursorCol, this.cols - n));
+    this.lineData[this.cursorY] = line.slice(0, this.cursorX).concat(" ".times(n).split(''), line.slice(this.cursorX, this.cols - n));
     this.updateLine();
+  },
+
+  ri: function(n) {
+    for (var i=0; i<n; i++) {
+      if (this.cursorY == 0) {
+        this.insertLines(0, n);
+      } else {
+        this.cursorUp();
+      }
+    }
+  },
+
+  insertLines: function(l, n) {
+    for (var i=0; i<n; i++) {
+      this.lineData.splice(l, 0, []);
+      this.clearLineData(l);
+    }
+
+    this.lineData.length = this.lines;
+
+    this.updateScreen();
   },
 
   fill: function(line, col, n, char) {

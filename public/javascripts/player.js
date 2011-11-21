@@ -1,6 +1,7 @@
 var SP = {};
 
 var speed = 1.0;
+// var speed = 0.2;
 var minDelay = 0.01;
 
 SP.Player = function(cols, lines, data, time) {
@@ -28,7 +29,7 @@ SP.Player.prototype = {
 
     var run = function() {
       var rest = this.interpreter.feed(this.currentData);
-      this.terminal.renderDirtyLines();
+      this.terminal.render();
       var n = timing[1];
 
       if (rest.length > 0)
