@@ -1,13 +1,13 @@
-<div class="hero-unit home-page">
-  <h1>ascii.io</h1>
-  <p>No nonsense asciicasting for serious hackers</p>
-
-  <p>
-    <a href="https://twitter.com/asciiio">Follow on Twitter</a> |
-    <a href="https://github.com/sickill/ascii.io">Contribute on Github</a> |
-    <a href="https://twitter.com/sickill">Meet the authors</a>
-  </p>
+<div class="teaser">
+  <h1>No nonsense asciicasting for serious hackers</h1>
 </div>
+
+<div class="featured-asciicast">
+    <%= render :partial => 'asciicasts/asciicast',
+              :object => @asciicast,
+              :locals => { :skip_description => true, :auto_play => false } %>
+</div>
+
 
 <div class="hero-unit">
   <h2>What?</h2>
@@ -22,30 +22,6 @@
     wanting to share their hackery. Web based player is an implementation of VT100/VT102
     ANSI terminal, supporting most ANSI sequences, all text attributes and 256 colors.
   </p>
-</div>
-
-<div class="hero-unit">
-  <h2>See</h2>
-
-  <p>
-    "A picture is worth a thousand words" Fred R. Barnard once said.
-  </p>
-  <p>
-    Just watch one of the featured asciicasts and see how cool
-    <strong>ascii.io</strong> is.
-  </p>
-
-  <div class="featured-asciicast">
-    <h3><%= asciicast_title(@asciicast) %></h3>
-
-    <%= render :partial => 'asciicasts/asciicast',
-              :object => @asciicast,
-              :locals => { :skip_description => true, :auto_play => false } %>
-
-    <div class="clear"></div>
-  </div>
-
-  <div class="clear"></div>
 </div>
 
 <div class="hero-unit">

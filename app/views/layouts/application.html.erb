@@ -32,28 +32,14 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
+    <header>
+      <h1><a href="/" class="brand">ascii.io</a></h1>
 
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
+      <%= render :partial => 'layouts/navigation' %>
+      <%= render :partial => 'layouts/session_info' %>
+    </header>
 
-          <a class="brand" href="/">ascii.io</a>
-
-          <div class="container-fluid nav-collapse">
-            <%= render :partial => 'layouts/navigation' %>
-            <%= render :partial => 'layouts/session_info' %>
-          </div><!--/.nav-collapse -->
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid">
+    <div class="wrap">
       <% flash.each do |type, message| %>
         <div class="alert alert-<%= type == :alert ? 'error' : 'success' %>">
           <a class="close" data-dismiss="alert">×</a>
@@ -61,27 +47,18 @@
         </div>
       <% end %>
 
-      <div class="row-fluid">
-        <%# <div class="span3"> %>
-        <%#   <div class="well sidebar-nav"> %>
-        <%#     <ul class="nav nav-list"> %>
-        <%#       <li class="nav-header">Sidebar</li> %>
-        <%#         <li><%= link_to "Link1", "/path1"  %1></li> %>
-        <%#         <li><%= link_to "Link2", "/path2"  %1></li> %>
-        <%#         <li><%= link_to "Link3", "/path3"  %1></li> %>
-        <%#     </ul> %>
-        <%#   </div><!--/.well --> %>
-        <%# </div><!--/span--> %>
-        <div class="span12">
+      <div class="main">
           <%= yield %>
-        </div>
-      </div><!--/row-->
+      </div>
+    </div>
 
-      <footer>
-        <p>Created by <%= link_to 'Marcin Kulik', 'https://github.com/sickill' %></p>
-      </footer>
-
-    </div> <!-- /container -->
-
+    <footer>
+      <p>Handcrafted by <%= link_to 'Marcin Kulik', 'https://github.com/sickill' %></p>
+      <nav class="social">
+        <a href="https://twitter.com/asciiio">Follow on Twitter</a> |
+        <a href="https://github.com/sickill/ascii.io">Contribute on Github</a> |
+        <a href="https://twitter.com/sickill">Meet the authors</a>
+      </nav>
+    </footer>
   </body>
 </html>

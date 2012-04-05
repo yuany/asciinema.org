@@ -36,7 +36,8 @@ class AsciiIo.Renderer.Pre extends AsciiIo.Renderer.Base
   fixSize: ->
     width = @$el.width()
     height = @$el.height()
-    @$el.css(width: width + 'px', height: height + 'px')
+    @$el.parent('.player').css(width: width + 'px')
+    @$el.css(height: height + 'px')
 
   render: (changes, cursorX, cursorY) ->
     @$el.find('.cursor').removeClass('cursor')

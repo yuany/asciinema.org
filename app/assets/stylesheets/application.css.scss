@@ -6,30 +6,89 @@
  *= require_tree .
 */
 
+@mixin transition($t) {
+  -webkit-transition:$t;
+  -moz-transition:$t;
+  -ms-transition:$t;
+  -o-transition:$t;
+  transition:$t;
+}
+
+body {
+  background-color:#fff;
+  background-image:image-url("bg.png");
+  background-position:0 0;
+  background-repeat:repeat-x;
+  border-top:5px solid #333;
+  padding-top:10px;
+}
+
+a {
+  color:#00abab;
+  text-decoration:none;
+
+  @include transition(color 1s ease-in-out);
+
+  &:hover {
+    color:#000;
+  }
+}
+
+p {
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:14px;
+}
+
 .clear {
   clear: both;
   display: block;
   visibility: hidden;
 }
 
-img.avatar {
-  border: 1px solid #aaa;
-  background-color: white;
-  padding: 1px;
-  width: 32px;
-}
+body > header {
+  margin:0 2em;
+  padding:0 2em;
+  border-bottom:1px solid #aaa;
+  overflow:hidden;
+  text-shadow:0 1px 0 rgba(255,255,255,.25);
 
-.navbar .nav li.avatar {
-  a {
-    padding: 3px 0 0 0;
+  .brand {
+    color:#000;
+  }
 
-    img {
-      border: 0;
-      padding: 0;
+  h1 {
+    float:left;
+  }
+
+  nav {
+    float:left;
+
+    &.user-navigation {
+      float:right;
     }
+  }
+
+  ul {
+    line-height:50px;
+  }
+
+  li {
+    display:inline;
+    font-size:14px;
+    font-weight:bold;
   }
 }
 
-footer {
+body > footer {
   margin-top: 100px;
+  text-align:center;
+
+  p, .social {
+    margin:0;
+    font-size:11px;
+  }
+
+  .social {
+    margin-top:5px;
+  }
 }

@@ -2,18 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.hero-unit.home-page {
-  .asciicast {
-    margin-top: 10px;
-  }
+.teaser {
+  margin:2em;
+  text-align:center;
 
-  h2 {
-    margin: 50px 0 10px 0;
+  h1 {
+    display:inline;
+    font-size:36px;
+    padding:2em;
   }
 }
 
 .featured-asciicast {
-  background-color: white;
-  padding: 20px;
-  float: left;
+  margin:1em 0;
+  background:#111;
+  padding:10px 0;
+
+  .asciicast {
+    text-align:center;
+  }
+
+  .player {
+    margin:0 auto;
+  }
 }

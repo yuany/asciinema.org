@@ -27,7 +27,6 @@ $color5: #EDC951;
 .player {
   /* border: 1px solid #777;*/
   /* background-color: #333;*/
-  float: left;
   display: block;
   padding: 0px;
   // margin: 0px 0px 30px 20px;
@@ -46,7 +45,7 @@ $color5: #EDC951;
   }
 
   .terminal, .font-sample, .hud {
-    font-family: 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+    font-family: 'Bitstream Vera Sans Mono', 'Menlo', 'Monaco', 'Ubuntu Mono', 'Courier New', monospace;
     font-size: 12px;
     line-height: inherit;
   }
