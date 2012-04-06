@@ -96,3 +96,68 @@ body > footer {
     margin-top:5px;
   }
 }
+
+// Custom grid
+
+.grid {
+  width:100%;
+  margin:0 auto;
+  overflow:hidden;
+}
+
+.column-2, .column-3 {
+  display:inline;
+  float:left;
+}
+
+@media only screen and (min-width: 768px) {
+  .grid {
+    width:750px;
+  }
+
+  .column-2 {
+    width:360px;
+    margin-right:30px;
+
+    &:last-child {
+      margin-right:0;
+    }
+  }
+
+  .column-3 {
+    width:230px;
+    margin-right:30px;
+
+    &:last-child {
+      margin-right:0;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .grid {
+    width:960px;
+  }
+
+  .column-2 {
+    width:465px;
+  }
+
+  .column-3 {
+    width:300px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .grid {
+    width:1140px;
+  }
+
+  .column-2 {
+    width:555px;
+  }
+
+  .column-3 {
+    width:360px;
+  }
+}
