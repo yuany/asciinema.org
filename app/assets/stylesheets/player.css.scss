@@ -50,6 +50,10 @@ $color5: #EDC951;
     line-height: inherit;
   }
 
+  canvas.terminal {
+    margin:0 auto;
+  }
+
   .terminal {
     overflow: hidden;
     padding: 2px;
