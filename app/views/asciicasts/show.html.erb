@@ -1,4 +1,5 @@
-<div class="page-header asciicast-heading">
+<div class="page-header grid">
+  <div class="column-2">
   <h1>
     <span class="title"><%= @asciicast.smart_title %></span>
 
@@ -11,19 +12,22 @@
                     :class => 'edit-title' %>
       <% end %>
     <% end %>
+  </h1>
+  </div>
 
-    <span class="meta">
+  <div class="column-2">
+    <p class="meta">
       Recorded by
       <%= profile_link(@asciicast, :avatar => false) %>
       <%= asciicast_time(@asciicast) %>
-    </span>
-  </h1>
+    </p>
 
-  <p class="env-info">
-    <span class="os">OS=<span class="value"><%= @asciicast.os %></span></span>
-    <span class="shell">SHELL=<span class="value"><%= @asciicast.shell_name %></span></span>
-    <span class="term-type">TERM=<span class="value"><%= @asciicast.terminal_type || '?' %></span></span>
-  </p>
+    <p class="env-info">
+      <span class="os">OS=<span class="value"><%= @asciicast.os %></span></span>
+      <span class="shell">SHELL=<span class="value"><%= @asciicast.shell_name %></span></span>
+      <span class="term-type">TERM=<span class="value"><%= @asciicast.terminal_type || '?' %></span></span>
+    </p>
+  </div>
 </div>
 
 <%= render :partial => 'asciicasts/asciicast', :object => @asciicast %>
@@ -44,7 +48,7 @@
               :class => 'asciicast-delete-link' %>
 <% end %>
 
-<div class="comments-container">
+<div class="comments-container grid">
   <h2>Comments</h2>
 
   <ul id="comments">
