@@ -9,53 +9,55 @@
 </div>
 
 
-<div class="column-2">
-  <h2>What?</h2>
+<div class="grid">
+  <div class="column-2">
+    <h2>What?</h2>
 
-  <p>
-    <strong>ascii.io</strong> lets you record your terminal sessions and share
-    them with other geeks simply by running <code>asciiio</code> command in your term.
-  </p>
+    <p>
+      <strong>ascii.io</strong> lets you record your terminal sessions and share
+      them with other geeks simply by running <code>asciiio</code> command in your term.
+    </p>
 
-  <p>
-    It is fully open-source platform with aim of being a "go to" place for terminal users
-    wanting to share their hackery. Web based player is an implementation of VT100/VT102
-    ANSI terminal, supporting most ANSI sequences, all text attributes and 256 colors.
-  </p>
+    <p>
+      It is fully open-source platform with aim of being a "go to" place for terminal users
+      wanting to share their hackery. Web based player is an implementation of VT100/VT102
+      ANSI terminal, supporting most ANSI sequences, all text attributes and 256 colors.
+    </p>
+  </div>
+
+  <div class="column-2">
+    <h2>Use it</h2>
+
+    <%= markdown do %>
+  To install or upgrade **ascii.io** recorder, open a terminal and run following command:
+
+      $ curl -sL get.ascii.io | bash
+
+  (when using zsh you may need to run `rehash` after above command)
+
+  That's it! Now you can start recording your terminal sessions with:
+
+      $ asciiio
+
+  If you want your recordings to be assigned to your ascii.io profile (btw, see mine: [~sickill](/~sickill)) run this
+  and follow instructions:
+
+      $ asciiio auth
+
+  See available commands and options with:
+
+      $ asciiio -h
+    <% end %>
+
+    <%# <%= link_to 'See help', manual_path, :class => "btn btn-large" %1> %>
+  </div>
 </div>
 
-<div class="column-2">
-  <h2>Use it</h2>
-
-  <%= markdown do %>
-To install or upgrade **ascii.io** recorder, open a terminal and run following command:
-
-    $ curl -sL get.ascii.io | bash
-
-(when using zsh you may need to run `rehash` after above command)
-
-That's it! Now you can start recording your terminal sessions with:
-
-    $ asciiio
-
-If you want your recordings to be assigned to your ascii.io profile (btw, see mine: [~sickill](/~sickill)) run this
-and follow instructions:
-
-    $ asciiio auth
-
-See available commands and options with:
-
-    $ asciiio -h
-  <% end %>
-
-  <%# <%= link_to 'See help', manual_path, :class => "btn btn-large" %1> %>
-</div>
-
-<div class="hero-unit">
+<div class="explore grid">
   <h2>Explore</h2>
 
   <p>
-    <%= link_to 'Browse', browse_path %> through
+    See what others have been up to! <%= link_to 'Browse', browse_path %> through
     all recorded asciicasts.
   </p>
 </div>
