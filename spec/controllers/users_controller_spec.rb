@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
 
-  describe "POST create" do
+  describe "#create" do
     let(:user) { mock_model(User).as_null_object }
 
     before do
@@ -12,10 +12,14 @@ describe UsersController do
     context "when user saved" do
       let(:provider) { 'foo' }
       let(:uid) { '123' }
+      let(:avatar_url) { 'url' }
 
       before do
-        session[:provider] = provider
-        session[:uid] = uid
+        session[:new_user] = {
+          :provider   => provider,
+          :uid        => uid,
+          :avatar_url => avatar_url
+        }
 
         user.stub!(:save => true)
       end
@@ -23,6 +27,7 @@ describe UsersController do
       it "assigns provider and uid" do
         user.should_receive(:provider=).with(provider).and_return(true)
         user.should_receive(:uid=).with(uid).and_return(true)
+        user.should_receive(:avatar_url=).with(avatar_url).and_return(true)
 
         post :create
       end
@@ -35,8 +40,7 @@ describe UsersController do
       it "clears user session data" do
         post :create
 
-        session[:provider].should be_nil
-        session[:uid].should be_nil
+        session[:new_user].should be_nil
       end
 
       it "redirects back" do
@@ -56,5 +60,17 @@ describe UsersController do
         should render_template('users/new')
       end
     end
+  end
+
+  describe '#show' do
+    it 'should have specs'
+  end
+
+  describe '#edit' do
+    it 'should have specs'
+  end
+
+  describe '#update' do
+    it 'should have specs'
   end
 end

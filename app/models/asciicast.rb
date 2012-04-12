@@ -9,6 +9,7 @@ class Asciicast < ActiveRecord::Base
 
   belongs_to :user
   has_many :comments, :order => :created_at, :dependent => :destroy
+  has_many :likes, :dependent => :destroy
 
   scope :featured, where(:featured => true)
 
@@ -38,59 +39,12 @@ class Asciicast < ActiveRecord::Base
     self.terminal_type    = data['term']['type']
   end
 
-  def os
-    if uname =~ /Linux/
-      'Linux'
-    elsif uname =~ /Darwin/
-      'OSX'
-    else
-      uname.split(' ', 2)[0]
-    end
-  end
-
-  def shell_name
-    File.basename(shell.to_s)
-  end
-
-  def as_json(opts = {})
-    super :methods => [:escaped_stdout_data, :stdout_timing_data]
-  end
-
-  def escaped_stdout_data
-    if data = stdout.read
-      data.bytes.map { |b| '\x' + format('%02x', b) }.join
-    else
-      nil
-    end
-  end
-
-  def stdout_timing_data
-    if data = stdout_timing.read
-      Bzip2.uncompress(data).lines.map do |line|
-        delay, n = line.split
-        [delay.to_f, n.to_i]
-      end
-    else
-      nil
-    end
-  end
-
   def assign_user
     if user_token.present?
       if ut = UserToken.find_by_token(user_token)
         self.user = ut.user
         self.user_token = nil
       end
-    end
-  end
-
-  def smart_title
-    if title.present?
-      title
-    elsif command.present?
-      "$ #{command}"
-    else
-      "##{id}"
     end
   end
 end

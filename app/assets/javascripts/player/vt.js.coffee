@@ -10,11 +10,11 @@ class AsciiIo.VT
       @handleControlCharacter(data[1])
       return 2
 
-    else if match = data.match(/^(\x1b\x5d|\x9d).*?(\x1b\\\\|\x9c|\x07)/)
+    else if match = data.match(/^(\x1b\x5d|\x9d).*?(\x1b\\|\x9c|\x07)/)
       # OSC seq
       return match[0].length
 
-    else if match = data.match(/^(\x1b[PX_^]|[\x90\x98\x9e\x9f]).*?(\x1b\\\\|\x9c)/)
+    else if match = data.match(/^(\x1b[PX_^]|[\x90\x98\x9e\x9f]).*?(\x1b\\|\x9c)/)
       # DCS/SOS/PM/APC seq
       return match[0].length
 

@@ -54,6 +54,7 @@ GEM
       xpath (~> 0.1.4)
     carrierwave (0.5.8)
       activesupport (~> 3.0)
+    celluloid (0.10.0)
     childprocess (0.3.0)
       ffi (~> 1.0.6)
     coffee-rails (3.2.2)
@@ -67,7 +68,10 @@ GEM
     commonjs (0.2.0)
       therubyracer (~> 0.9.9)
     confstruct (0.2.1)
+    connection_pool (0.9.1)
     diff-lcs (1.1.3)
+    draper (0.11.1)
+      activesupport (>= 2.3.10)
     erubis (2.7.0)
     excon (0.9.6)
     execjs (1.3.0)
@@ -77,8 +81,6 @@ GEM
     factory_girl_rails (1.6.0)
       factory_girl (~> 2.5.0)
       railties (>= 3.0.0)
-    faker (1.0.1)
-      i18n (~> 0.4)
     faraday (0.7.6)
       addressable (~> 2.2)
       multipart-post (~> 1.1)
@@ -201,6 +203,9 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.0)
+    redis (2.2.2)
+    redis-namespace (1.1.0)
+      redis (< 3.0.0)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -236,9 +241,19 @@ GEM
       ffi (~> 1.0.9)
       json_pure
       rubyzip
+    sidekiq (0.11.1)
+      celluloid (~> 0.10.0)
+      connection_pool (~> 0.9.0)
+      multi_json
+      redis
+      redis-namespace
     simple_form (1.5.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simplecov (0.6.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.5.3)
+    simplecov-html (0.5.3)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -277,8 +292,8 @@ DEPENDENCIES
   carrierwave
   coffee-rails
   confstruct
+  draper
   factory_girl_rails
-  faker
   fog
   guard
   guard-jasmine
@@ -298,7 +313,9 @@ DEPENDENCIES
   rspec-rails
   ruby-debug19
   sass-rails
+  sidekiq
   simple_form
+  simplecov
   tailor
   twitter-bootstrap-rails
   tzinfo

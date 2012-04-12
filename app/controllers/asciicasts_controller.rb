@@ -8,13 +8,16 @@ class AsciicastsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @asciicasts = Asciicast.
+    collection = Asciicast.
       order("created_at DESC").
       page(params[:page]).
       per(PER_PAGE)
+
+    @asciicasts = AsciicastDecorator.decorate(collection)
   end
 
   def show
+    @asciicast = AsciicastDecorator.new(@asciicast)
     @title = @asciicast.smart_title
     respond_with @asciicast
   end
