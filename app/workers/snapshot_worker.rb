@@ -61,13 +61,14 @@ class SnapshotWorker
     lines = []
     status = nil
 
-    Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
-      while !stdout.eof?
-        lines << stdout.readline
-      end
+    pid, stdin, stdout, stderr = open4 command
 
-      status = wait_thr.value.exitstatus
+    while !stdout.eof?
+      lines << stdout.readline
     end
+
+    Process::waitpid pid
+    status = $?.exitstatus
 
     raise "Can't capture output of asciicast ##{@asciicast.id}" if status != 0
 

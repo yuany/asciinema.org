@@ -18,6 +18,7 @@ module ApplicationHelper
   end
 
   def markdown(&block)
-    MKD_RENDERER.render(capture(&block)).html_safe
+    text = capture(&block)
+    Kramdown::Document.new(text).to_html.html_safe
   end
 end
