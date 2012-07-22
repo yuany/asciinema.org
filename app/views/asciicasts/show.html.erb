@@ -33,6 +33,15 @@
         <li>
           Viewed: <%= @asciicast.views_count %> times
         </li>
+        <li>
+          OS: <%= @asciicast.os %>
+        </li>
+        <li>
+          SHELL: <%= @asciicast.shell_name %>
+        </li>
+        <li>
+          TERM: <%= @asciicast.terminal_type || '?' %>
+        </li>
       </ul>
 
       <%# <h1>Share</h1> %>
