@@ -100,6 +100,11 @@ class AsciicastDecorator < ApplicationDecorator
     @thumbnail
   end
 
+  def formatted_description
+    text = model.description.to_s
+    MKD_RENDERER.render(text).html_safe
+  end
+
   private
 
   def prepare_lines(lines, width, height)

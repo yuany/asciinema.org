@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     load_sensitive_user_data_from_session
+
     if @user.save
       clear_sensitive_session_user_data
       self.current_user = @user

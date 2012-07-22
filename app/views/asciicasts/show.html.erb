@@ -1,33 +1,55 @@
 <section id="presentation" class="feature">
   <div class="asciicast-wrapper">
-    <%# <h1><%= @asciicast.smart_title %1></h1> %>
     <%= render :partial => 'asciicasts/player',
                 :locals => { :asciicast => @asciicast } %>
 
-    <%# <div class="extras"> %>
-    <%#   <div class="presenter"> %>
-    <%#     <a href="/u/valakirka"><img alt="09a14d61e3e1f8b1fe6866b4fdbb4abe?s=47" src="//secure.gravatar.com/avatar/09a14d61e3e1f8b1fe6866b4fdbb4abe?s=47"></a> %>
-    <%#     <h2><a href="/u/valakirka">valakirka</a></h2> %>
-    <%#     <p>1 Presentation</p> %>
-    <%#   </div> %>
-    <%# </div> %>
   </div>
 </section>
 
 <section class="supplimental">
   <div class="wrapper">
     <div class="main">
-      <h1>Description</h1>
+      <h1><%= @asciicast.smart_title %></h1>
       <div class="description">
-        <%= markdown do %><%= @asciicast.description.to_s %><% end %>
+        <% if @asciicast.description.present? -%>
+          <%= @asciicast.formatted_description %>
+        <% else -%>
+          <em>No description.</em>
+        <% end -%>
       </div>
     </div>
 
     <div class="extras">
-      <h1>Speaker Bio</h1>
-      <p>
-        <a href="#">View Speaker Details</a>
-      </p>
+      <div class="presenter">
+        <%= link_to profile_path(@asciicast.user) do %>
+          <%= avatar_img @asciicast.user %>
+        <% end -%>
+        <h2><%= profile_link @asciicast %></h2>
+        <p><%= @asciicast_author.asciicasts_count %> asciicasts</p>
+      </div>
+
+      <h1>Info</h1>
+
+      <ul class="delimited">
+        <li>
+          Recorded <%= @asciicast.created_at %> ago
+        </li>
+        <li>
+          70 views
+        </li>
+      </ul>
+
+      <%# <h1>Share</h1> %>
+
+      <%# <ul class="delimited"> %>
+      <%#   <li> %>
+      <%#     Twitter %>
+      <%#   </li> %>
+      <%# </ul> %>
     </div>
   </div>
 </section>
+
+    <%# <div class="extras"> %>
+    <%#   </div> %>
+    <%# </div> %>

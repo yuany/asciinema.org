@@ -4,6 +4,13 @@
       <h1>Asciicasts by ~<%= @user.nickname %></h1>
       <%= render :partial => 'asciicasts/previews' %>
       <%= paginate @asciicasts %>
+      <% if @asciicasts.size == 0 %>
+        <% if current_user == @user -%>
+          You haven't recorded anything yet. <%= link_to 'Record now', record_path %>
+        <% else -%>
+          <%= @user.nickname %> hasn't recorded anything yet.
+        <% end -%>
+      <% end -%>
     </div>
 
     <div class="extras">

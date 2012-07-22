@@ -18,6 +18,7 @@ class AsciicastsController < ApplicationController
 
   def show
     @asciicast = AsciicastDecorator.new(@asciicast)
+    @asciicast_author = UserDecorator.new(@asciicast.user)
     @title = @asciicast.smart_title
     respond_with @asciicast
   end
