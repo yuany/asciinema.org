@@ -16,6 +16,10 @@ class AsciicastDecorator < ApplicationDecorator
     data
   end
 
+  def created_at
+    h.distance_of_time_in_words_to_now(model.created_at).sub('about ', '')
+  end
+
   def escaped_stdout_data
     if data = stdout.read
       Base64.strict_encode64(data)

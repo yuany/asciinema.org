@@ -90,23 +90,12 @@ $color5: #EDC951;
     cursor: pointer;
 
     .play-button {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 0;
-
       .arrow {
-        // background-color: #396;
+        color: white;
         font-size: 140px;
         width: 150px;
         margin-left: -75px;
-        // padding-bottom: 25px;
-
-        text-align: center;
-        // padding: 20px 10px;
-        color: white;
         margin-top: -100px;
-        font-weight: bold;
         -webkit-font-smoothing: none;
 
         &:hover {

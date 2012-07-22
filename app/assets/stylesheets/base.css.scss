@@ -37,6 +37,10 @@ h3 {
   margin: 0;
 }
 
+ol, ul {
+  list-style: none;
+}
+
 body {
   font-family: "Helvetica Neue", Helvetica, "Liberation Sans", FreeSans, Arial, sans-serif;
   // font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
@@ -69,8 +73,25 @@ a:hover {
   text-decoration: underline;
 }
 
-a.no-underline:hover {
-  text-decoration: none;
+a.preview-link {
+  .play-button {
+    display: none;
+
+    .arrow {
+      color: black;
+      font-size: 80px;
+      margin-left: -37px;
+      margin-top: -79px;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+
+    .play-button {
+      display: block;
+    }
+  }
 }
 
 p.links {
@@ -287,4 +308,35 @@ section::after {
   display: block;
   height: 0;
   visibility: hidden;
+}
+
+.play-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+
+  .arrow {
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+ul.delimited {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  margin: 0 0 20px;
+  padding: 0;
+  font-size: 14px;
+
+  li {
+    padding: 5px 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+  }
+
+  a {
+    display: block;
+  }
 }

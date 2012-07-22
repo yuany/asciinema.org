@@ -18,10 +18,6 @@ module AsciicastsHelper
     end
   end
 
-  def asciicast_time(asciicast)
-    time_ago_in_words(asciicast.created_at) + " ago"
-  end
-
   def player_script(asciicast, options = {})
     speed = (params[:speed] || 1).to_f
     benchmark = !!params[:bm]
