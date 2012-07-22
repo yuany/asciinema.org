@@ -1,10 +1,13 @@
 @import 'terminal-font';
+@import 'shared';
 
 #about {
+  padding: 25px 10px 45px 10px;
+
   h1 {
-    font-family: 'Open Sans', "Lucida Grande", Tahoma, Verdana, sans-serif;
+    font-family: $font, "Lucida Grande", Tahoma, Verdana, sans-serif;
     font-weight: 300;
-    color: #3AB278;
+    color: $main-color;
     font-size: 50px;
     line-height: 0.9;
     margin: 0 0 30px;
@@ -13,13 +16,14 @@
     em {
       color: white;
       font-weight: 300;
+      font-style: normal;
     }
   }
 
   p {
-    font-family: 'Open Sans', "Lucida Grande", Tahoma, Verdana, sans-serif;
+    font-family: $font, "Lucida Grande", Tahoma, Verdana, sans-serif;
     font-weight: 300;
-    color: #88D2AD;
+    color: $main-color-light;
     font-size: 20px;
     line-height: 1.5;
     margin: 0 0 30px;
@@ -82,7 +86,7 @@ div.secondary_info {
 
     .info {
       h3 {
-        font-family: 'Open Sans', "Lucida Grande", Tahoma, Verdana, sans-serif;
+        font-family: $font, "Lucida Grande", Tahoma, Verdana, sans-serif;
         letter-spacing: 0;
         font-weight: 300;
         font-size: 18px;
