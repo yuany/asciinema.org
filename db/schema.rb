@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504191706) do
+ActiveRecord::Schema.define(:version => 20120722194347) do
 
   create_table "asciicasts", :force => true do |t|
     t.integer  "user_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20120504191706) do
     t.integer  "comments_count",   :default => 0,     :null => false
     t.integer  "likes_count",      :default => 0,     :null => false
     t.boolean  "time_compression", :default => true,  :null => false
+    t.integer  "views_count",      :default => 0,     :null => false
   end
 
   add_index "asciicasts", ["created_at"], :name => "index_asciicasts_on_created_at"

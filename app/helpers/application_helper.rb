@@ -21,10 +21,11 @@ module ApplicationHelper
     image_path "default_avatar.png"
   end
 
-  def avatar_img(user)
+  def avatar_img(user, options = {})
+    klass = options[:class] || "avatar"
     nickname =  "~#{user.nickname}"
     image_tag user.avatar_url || default_avatar_url,
-      :title => nickname, :alt => nickname, :class => "avatar"
+      :title => nickname, :alt => nickname, :class => klass
   end
 
   def markdown(&block)

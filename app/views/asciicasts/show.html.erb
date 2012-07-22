@@ -22,7 +22,7 @@
     <div class="extras">
       <div class="presenter">
         <%= link_to profile_path(@asciicast.user) do %>
-          <%= avatar_img @asciicast.user %>
+          <%= avatar_img @asciicast.user, :class => '' %>
         <% end -%>
         <h2><%= profile_link @asciicast %></h2>
         <p><%= @asciicast_author.asciicasts_count %> asciicasts</p>
@@ -32,10 +32,10 @@
 
       <ul class="delimited">
         <li>
-          Recorded <%= @asciicast.created_at %> ago
+          Recorded: <%= @asciicast.created_at %> ago
         </li>
         <li>
-          70 views
+          Viewed: <%= @asciicast.views_count %> times
         </li>
       </ul>
 
