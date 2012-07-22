@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  PER_PAGE = 20
+  PER_PAGE = 15
 
   before_filter :ensure_authenticated!, :only => [:edit, :update]
 

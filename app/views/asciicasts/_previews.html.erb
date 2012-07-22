@@ -1,0 +1,19 @@
+<div class="presentations">
+  <% @asciicasts.each do |asciicast| -%>
+    <div class="presentation">
+      <a href="#">
+        <pre class="preview"><%= asciicast.thumbnail(28, 9) %></pre>
+      </a>
+
+      <div class="info">
+        <h3>
+          <a href="#"><%= asciicast.smart_title %></a>
+        </h3>
+
+        <p class="date">
+          Jul 6, 2012 by <a href="#">~topfunky</a>
+        </p>
+      </div>
+    </div>
+  <% end -%>
+</div>

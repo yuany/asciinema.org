@@ -1,5 +1,5 @@
 class AsciicastsController < ApplicationController
-  PER_PAGE = 20
+  PER_PAGE = 15
 
   before_filter :load_resource, :only => [:show, :edit, :update, :destroy]
   before_filter :ensure_authenticated!, :only => [:edit, :update, :destroy]

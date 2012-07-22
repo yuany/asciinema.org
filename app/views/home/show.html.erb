@@ -1,3 +1,38 @@
+<section id="about" class="feature">
+  <div class="wrapper">
+    <div class="primary_info">
+      <h1><em>Share Presentations</em> without the Mess</h1>
+
+      <p> Speaker Deck is the best way to share presentations online.
+        Simply upload your slides as a PDF, and we’ll turn them into a
+        beautiful online experience. View them on SpeakerDeck.com, or
+        share them on any website with an embed code.  </p>
+
+      <p><a href="/signup" class="">Go Ahead,
+          Sign Up to Get Started</a></p>
+    </div>
+
+    <div class="secondary_info">
+      <%= render :partial => 'asciicasts/player',
+                 :locals => { :asciicast => @asciicast } %>
+    </div>
+  </div>
+</section>
+
+<section class="supplimental">
+  <div class="wrapper">
+    <div class="main">
+      <h1>Recent Asciicasts</h1>
+      <%= render :partial => 'asciicasts/previews' %>
+    </div>
+
+    <%# <div class="extras"> %>
+    <%# </div> %>
+  </div>
+</section>
+
+<!--
+
 <div class="hero-unit home-page">
   <h1>ascii.io</h1>
   <p>No nonsense asciicasting for serious hackers</p>
@@ -38,9 +73,9 @@
   <div class="featured-asciicast">
     <h3><%= @asciicast.smart_title %></h3>
 
-    <%= render :partial => 'asciicasts/asciicast',
-              :object => @asciicast,
-              :locals => { :skip_description => true, :auto_play => false } %>
+    <%# <%= render :partial => 'asciicasts/asciicast', %>
+    <%#           :object => @asciicast, %>
+    <%#           :locals => { :skip_description => true, :auto_play => false } %1> %>
 
     <div class="clear"></div>
   </div>
@@ -83,3 +118,5 @@ See available commands and options with:
     all recorded asciicasts.
   </p>
 </div>
+
+-->
