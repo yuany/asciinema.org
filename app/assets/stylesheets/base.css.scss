@@ -1,12 +1,5 @@
 @import 'shared';
 
-@font-face {
-  font-family: 'ProximaNova-Light';
-  src: url('ProximaNova-Light.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 h1, h2, h3 {
   font-family: $font, "Lucida Grande", Tahoma, Verdana, sans-serif;
   font-weight: 300;

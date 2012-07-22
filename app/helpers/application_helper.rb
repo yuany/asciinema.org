@@ -17,17 +17,6 @@ module ApplicationHelper
     "/auth/github"
   end
 
-  def default_avatar_url
-    image_path "default_avatar.png"
-  end
-
-  def avatar_img(user, options = {})
-    klass = options[:class] || "avatar"
-    nickname =  "~#{user.nickname}"
-    image_tag user.avatar_url || default_avatar_url,
-      :title => nickname, :alt => nickname, :class => klass
-  end
-
   def markdown(&block)
     text = capture(&block)
     MKD_RENDERER.render(capture(&block)).html_safe

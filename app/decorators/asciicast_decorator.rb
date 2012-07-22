@@ -105,6 +105,24 @@ class AsciicastDecorator < ApplicationDecorator
     MKD_RENDERER.render(text).html_safe
   end
 
+  def author_profile_link(options = {})
+    if asciicast.user
+      if options[:avatar]
+        img = avatar_img(asciicast.user) + " "
+      else
+        img = ""
+      end
+
+      h.link_to img + "~#{asciicast.user.nickname}", h.profile_path(asciicast.user)
+    else
+      if asciicast.username.present?
+        "~#{asciicast.username}"
+      else
+        "anonymous"
+      end
+    end
+  end
+
   private
 
   def prepare_lines(lines, width, height)

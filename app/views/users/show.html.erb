@@ -15,7 +15,7 @@
 
     <div class="extras">
       <h1><%= @user.nickname %></h1>
-      <p><%= avatar_img(@user) %></p>
+      <p><%= @user.avatar_img %></p>
       <h3><%= @user.asciicasts_count %> asciicasts</h3>
 
       <% if current_user %>
