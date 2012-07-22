@@ -275,9 +275,11 @@ footer {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     border-radius: 5px;
-    // -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.3) 0 1px 3px;
-    // -moz-box-shadow: rgba(0,0,0,0.2) 0 0 0 1px,rgba(0,0,0,0.3) 0 1px 3px;
-    // box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.3) 0 1px 3px;
+    width: 48px;
+
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.3) 0 1px 3px;
+    -moz-box-shadow: rgba(0,0,0,0.2) 0 0 0 1px,rgba(0,0,0,0.3) 0 1px 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.3) 0 1px 3px;
   }
 }
 
