@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><% if @title %><%= @title + " - " %><% end %>ascii.io</title>
+    <title><%= page_title %></title>
     <%= airbrake_javascript_notifier unless CFG['AIRBRAKE_API_KEY'].blank? %>
     <%= csrf_meta_tags %>
 
@@ -25,7 +25,7 @@
     <header>
       <div class="wrapper">
         <h1>
-          <a href="/">ascii.io</a>
+          <a href="/">ascii.io <span class="cursor-block"></a>
         </h1>
 
         <div class="navigation">

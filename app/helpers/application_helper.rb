@@ -1,4 +1,14 @@
 module ApplicationHelper
+  def page_title
+    title = "ascii.io"
+
+    if @title
+      title = "#{@title} - #{title}"
+    end
+
+    title
+  end
+
   def twitter_auth_path
     "/auth/twitter"
   end

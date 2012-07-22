@@ -66,7 +66,6 @@ a {
 }
 
 a:hover {
-  // color: $main-color-light;
   text-decoration: underline;
 }
 
@@ -138,11 +137,11 @@ header {
     letter-spacing: -0.05em;
 
     a {
-      background: image-url("ascii-io-icon-v2.png") no-repeat;
+      // background: image-url("ascii-io-icon-v2.png") no-repeat;
       display: block;
       height: 34px;
       line-height: 34px;
-      padding-left: 28px;
+      // padding-left: 28px;
       font-size: 18px;
       overflow: hidden;
       position: relative;
@@ -152,7 +151,7 @@ header {
       background-position-y: 45%;
 
       &:hover {
-        color: $main-color;
+        text-decoration: none;
       }
     }
   }
@@ -258,6 +257,15 @@ footer {
     // -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.3) 0 1px 3px;
     // -moz-box-shadow: rgba(0,0,0,0.2) 0 0 0 1px,rgba(0,0,0,0.3) 0 1px 3px;
     // box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.3) 0 1px 3px;
+  }
+}
+
+.cursor-block {
+  background-color: white;
+  // font-size: 40px;
+
+  &::after {
+    content: 't';
   }
 }
 

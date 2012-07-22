@@ -1,15 +1,19 @@
 <section id="about" class="feature">
   <div class="wrapper">
     <div class="primary_info">
-      <h1><em>Share Presentations</em> without the Mess</h1>
+      <h1>
+        <em>Record Your Terminal</em>
+        Share it with no fuss
+      </h1>
 
-      <p> Speaker Deck is the best way to share presentations online.
-        Simply upload your slides as a PDF, and we’ll turn them into a
-        beautiful online experience. View them on SpeakerDeck.com, or
-        share them on any website with an embed code.  </p>
+      <p> ASCII.IO is the simplest way to record your terminal and share
+        recordings with your fellow geeks.  Simply record and upload your
+        terminal session with <%= link_to 'single command', record_path %>, and
+        ASCII.IO will play it back in your browser.  </p>
 
-      <p><a href="/signup" class="">Go Ahead,
-          Sign Up to Get Started</a></p>
+      <p>
+        <%= link_to '&raquo; Start Recording'.html_safe, record_path %>
+      </p>
     </div>
 
     <div class="secondary_info">
@@ -26,8 +30,10 @@
       <%= render :partial => 'asciicasts/previews' %>
     </div>
 
-    <%# <div class="extras"> %>
-    <%# </div> %>
+    <div class="extras">
+      <h1>Browse</h1>
+      <p>Nana</p>
+    </div>
   </div>
 </section>
 

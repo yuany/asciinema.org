@@ -11,22 +11,6 @@ $color3: #CC333F;
 $color4: #EB6841;
 $color5: #EDC951;
 
-// .asciicasts {
-//   list-style: none;
-
-//   .asciicast-preview {
-//     h3 {
-//       font-size: 16px;
-
-//       a {
-//         color: $color1;
-//       }
-//     }
-
-//     margin-bottom: 30px;
-//   }
-// }
-
 @mixin player-overlay {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
@@ -126,7 +110,10 @@ $color5: #EDC951;
         -webkit-font-smoothing: none;
 
         &:hover {
-          color: $main-color-light;
+          text-shadow: 2px 2px 5px $main-color;
+
+          // -moz-transform: rotate(-5deg);
+          // -webkit-transform: rotate(-5deg);
         }
       }
     }
