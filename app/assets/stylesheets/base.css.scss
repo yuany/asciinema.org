@@ -213,7 +213,6 @@ footer {
   font-weight: 400;
   border-top: 1px solid #444;
   color: #AAA;
-  opacity: 0.7;
   clear: both;
   display: block;
   overflow: hidden;
@@ -334,5 +333,52 @@ ul.delimited {
 
   a {
     display: block;
+  }
+}
+
+p.notice, p.alert, p.error {
+  background: #396;
+  color: white;
+  font-size: 15px;
+  height: 38px;
+  line-height: 36px;
+  margin: 0;
+  text-align: center;
+}
+
+.divider-vertical {
+  width: 30px;
+  height: 36px;
+  float: left;
+}
+
+.vertical-expander {
+  height: 300px;
+}
+
+.session-info {
+  .username {
+    position: relative;
+
+    a {
+      color: $main-color;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 33px;
+      right: 0;
+      width: 100px;
+      background-color: black;
+
+      a {
+        color: white;
+      }
+    }
+
+    &:hover .menu {
+      display: block;
+    }
   }
 }

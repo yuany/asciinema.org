@@ -3,6 +3,7 @@
  *= require overpass
  *= require base
  *= require home
+ *= require login
  *= require asciicasts
  *= require player/colors
  *= require player/player

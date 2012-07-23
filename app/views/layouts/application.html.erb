@@ -30,17 +30,15 @@
 
         <div class="navigation">
           <%= render :partial => 'layouts/navigation' %>
-          <%# <%= render :partial => 'layouts/session_info' %1> %>
+          <div class="divider-vertical"></div>
+          <%= render :partial => 'layouts/session_info' %>
         </div>
       </div>
     </header>
 
-      <%# <% flash.each do |type, message| %1> %>
-      <%#   <div class="alert alert-<%= type == :alert ? 'error' : 'success' %1>"> %>
-      <%#     <a class="close" data-dismiss="alert">×</a> %>
-      <%#     <%= message %1> %>
-      <%#   </div> %>
-      <%# <% end %1> %>
+    <% flash.each do |type, message| %>
+      <p class="<%= type %>"><%= message %></p>
+    <% end %>
 
     <div id="content">
       <%= yield %>
