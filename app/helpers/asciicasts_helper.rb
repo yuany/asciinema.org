@@ -9,7 +9,7 @@ module AsciicastsHelper
     end
 
     if custom_renderer = params[:renderer]
-      renderer_class = "AsciiIo.Renderer.#{custom_renderer.capitalize}"
+      renderer_class = "AsciiIo.Renderer.#{custom_renderer.camelize}"
     else
       renderer_class = "AsciiIo.Renderer.Pre"
     end
