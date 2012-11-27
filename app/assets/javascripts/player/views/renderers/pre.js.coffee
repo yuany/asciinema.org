@@ -12,10 +12,12 @@ class AsciiIo.Renderer.Pre extends AsciiIo.Renderer.Base
     i = 0
 
     while i < @lines
-      row = $("<span class=\"line\">")
+      row = $('<span class="line">')
       @$el.append row
       @$el.append "\n"
       i++
+
+    @$lines = @$('.line')
 
   fixTerminalElementSize: ->
     width = @cols * @cellWidth
@@ -46,20 +48,19 @@ class AsciiIo.Renderer.Pre extends AsciiIo.Renderer.Base
       else
         t = @escape(text)
 
+      brush = AsciiIo.Brush.create brush
       html.push @spanFromBrush(brush)
       html.push t
       html.push '</span>'
 
       rendered += text.length
 
-    @$el.find(".line:eq(" + n + ")")[0].innerHTML = '<span>' + html.join('') + '</span>'
+    @$lines[n].innerHTML = '<span>' + html.join('') + '</span>'
 
   escape: (text) ->
     text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
   spanFromBrush: (brush) ->
-    brush = AsciiIo.Brush.create brush
-
     key = brush.hash()
     span = @cachedSpans[key]
 
@@ -68,27 +69,33 @@ class AsciiIo.Renderer.Pre extends AsciiIo.Renderer.Base
 
       if brush != AsciiIo.Brush.default()
         span = "<span class=\""
-
-        unless brush.hasDefaultFg()
-          span += " fg" + brush.fgColor()
-
-        unless brush.hasDefaultBg()
-          span += " bg" + brush.bgColor()
-
-        if brush.bright
-          span += " bright"
-
-        if brush.underline
-          span += " underline"
-
-        if brush.italic
-          span += " italic"
-
+        klass = @classForBrush brush
+        span += klass
         span += "\">"
 
       @cachedSpans[key] = span
 
     span
+
+  classForBrush: (brush) ->
+    klass = ''
+
+    unless brush.hasDefaultFg()
+      klass += " fg" + brush.fgColor()
+
+    unless brush.hasDefaultBg()
+      klass += " bg" + brush.bgColor()
+
+    if brush.bright
+      klass += " bright"
+
+    if brush.underline
+      klass += " underline"
+
+    if brush.italic
+      klass += " italic"
+
+    klass
 
   showCursor: (show) ->
     if show

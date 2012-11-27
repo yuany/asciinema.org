@@ -5,6 +5,7 @@
 //= require extensions
 //= require namespace
 //= require player/views/renderers/base
+//= require player/views/renderers/pre
 //= require_tree ./player/views/renderers
 //= require player/views/hud_view
 //= require player/data_unpacker
