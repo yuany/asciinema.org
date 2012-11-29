@@ -208,7 +208,7 @@ class AsciiIo.Movie
     [delay, count] = frame
 
     frameData = @data().slice(@dataIndex, @dataIndex + count)
-    @trigger 'data', frameData
+    @trigger 'data', @frameNo, frameData
 
     @frameNo += 1
     @dataIndex += count
@@ -217,3 +217,13 @@ class AsciiIo.Movie
 
     @clearPauseState()
     @nextFrame()
+
+  preprocess: ->
+    start = 0
+
+    for frame in @timing()
+      [_, count] = frame
+      end = start + count
+      data = @data().slice(start, end)
+      @trigger 'preprocess-data', data
+      start += count

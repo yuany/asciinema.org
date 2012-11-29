@@ -20,6 +20,7 @@ module AsciicastsHelper
       lines: asciicast.terminal_lines,
       speed: (options[:speed] || params[:speed] || 1).to_f,
       benchmark: !!params[:bm],
+      preprocess: !!params[:preprocess],
       asciicast_id: asciicast.id,
       renderer_class: renderer_class,
       auto_play: options.key?(:auto_play) ? !!options[:auto_play] : false,

@@ -1,5 +1,9 @@
 class AsciiIo.FallbackPlayer extends AsciiIo.AbstractPlayer
 
+  constructor: (@options) ->
+    super
+    @states = []
+
   createVT: ->
     @vt = new AsciiIo.VT @options.cols, @options.lines
 
@@ -14,8 +18,21 @@ class AsciiIo.FallbackPlayer extends AsciiIo.AbstractPlayer
 
     @movie.on 'reset', => @vt.reset()
 
-    @movie.on 'data', (data) =>
-      @vt.feed data
-      state = @vt.state()
-      @vt.clearChanges()
-      @movie.trigger 'render', state
+    if @options.preprocess
+      @movie.on 'preprocess-data', (data) =>
+        @vt.feed data
+        state = @vt.state()
+        @vt.clearChanges()
+        @states.push state
+
+      @movie.preprocess()
+
+      @movie.on 'data', (frameNo, frameData) =>
+        state = @states[frameNo]
+        @movie.trigger 'render', state
+    else
+      @movie.on 'data', (frameNo, frameData) =>
+        @vt.feed frameData
+        state = @vt.state()
+        @vt.clearChanges()
+        @movie.trigger 'render', state
