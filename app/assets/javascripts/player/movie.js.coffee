@@ -124,7 +124,7 @@ class AsciiIo.Movie
 
     data = @data().slice(0, totalCount)
     @trigger 'reset'
-    @trigger 'data', [data]
+    @trigger 'data', data
 
     @lastFrameAt = @now()
     wait = requestedTime - time
@@ -208,7 +208,7 @@ class AsciiIo.Movie
     [delay, count] = frame
 
     frameData = @data().slice(@dataIndex, @dataIndex + count)
-    @trigger 'data', [frameData]
+    @trigger 'data', frameData
 
     @frameNo += 1
     @dataIndex += count
