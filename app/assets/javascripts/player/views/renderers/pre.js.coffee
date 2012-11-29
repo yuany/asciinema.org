@@ -49,9 +49,13 @@ class AsciiIo.Renderer.Pre extends AsciiIo.Renderer.Base
         t = @escape(text)
 
       brush = AsciiIo.Brush.create brush
-      html.push @spanFromBrush(brush)
-      html.push t
-      html.push '</span>'
+
+      if brush != AsciiIo.Brush.default()
+        html.push @spanFromBrush(brush)
+        html.push t
+        html.push '</span>'
+      else
+        html.push t
 
       rendered += text.length
 
@@ -64,14 +68,11 @@ class AsciiIo.Renderer.Pre extends AsciiIo.Renderer.Base
     key = brush.hash()
     span = @cachedSpans[key]
 
-    if not span
-      span = ""
-
-      if brush != AsciiIo.Brush.default()
-        span = "<span class=\""
-        klass = @classForBrush brush
-        span += klass
-        span += "\">"
+    if span == undefined
+      span = "<span class=\""
+      klass = @classForBrush brush
+      span += klass
+      span += "\">"
 
       @cachedSpans[key] = span
 
