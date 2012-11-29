@@ -2,7 +2,7 @@ fragments = undefined
 
 f = -> window.player.view.rendererView.renderLine 0, fragments
 
-bm = (f, times) ->
+window.bm = (f, times) ->
   start = new Date
 
   i = 0
@@ -20,10 +20,10 @@ window.bmLines = (n = 30, times = 10000) ->
     fragments.push ["X", AsciiIo.Brush._default]
     i++
 
-  bm f, times
+  window.bm f, times
 
 window.bmAll = ->
   i = 1
-  while i <= 90
+  while i <= 51
     window.bmLines i, 5000
-    i += 10
+    i += 5
