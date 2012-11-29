@@ -40,6 +40,10 @@ describe 'AsciiIo.Brush', ->
       expect(_(AsciiIo.Brush.cache).keys().length).toEqual(2)
       expect(brush is anotherBrush).toBeTruthy()
 
+    it 'caches default brush', ->
+      brush = AsciiIo.Brush.create()
+      expect(AsciiIo.Brush.cache[brush.hash()]).toEqual brush
+
   describe '#fgColor', ->
 
     it 'returns 7 if fg is undefined', ->

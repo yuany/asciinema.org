@@ -11,7 +11,7 @@ class AsciiIo.Brush
     @_default ||= @create()
 
   @hash: (brush) ->
-    "#{brush.fg}_#{brush.bg}_#{brush.blink}_#{brush.bright}_#{brush.italic}_#{brush.underline}_#{brush.reverse}"
+    "#{brush.fg}_#{brush.bg}_#{brush.blink || false}_#{brush.bright || false}_#{brush.italic || false}_#{brush.underline || false}_#{brush.reverse || false}"
 
   @create: (options = {}) ->
     key = @hash options
