@@ -30,7 +30,6 @@ class AsciiIo.Renderer.Canvas extends AsciiIo.Renderer.Base
 
   renderLine: (n, fragments, cursorX) ->
     left = 0
-    width = @cols * @cellWidth
     top = n * @cellHeight
     cursorText = undefined
     rendered = 0
