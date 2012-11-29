@@ -35,12 +35,15 @@ class AsciiIo.Renderer.PreReuse extends AsciiIo.Renderer.Pre
 
       if brush
         brush = AsciiIo.Brush.create brush
-        spans[i].className = @classForBrush brush
+        if brush != AsciiIo.Brush.default()
+          spans[i].className = @classForBrush brush
+        else
+          spans[i].className = ''
       else
         spans[i].className = ''
 
       i++
 
-    while i < @lines
+    while i < @cols
       spans[i].innerHTML = ''
       i++
