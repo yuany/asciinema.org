@@ -40,3 +40,7 @@ class AsciiIo.Renderer.PreReuse extends AsciiIo.Renderer.Pre
         spans[i].className = ''
 
       i++
+
+    while i < @lines
+      spans[i].innerHTML = ''
+      i++
