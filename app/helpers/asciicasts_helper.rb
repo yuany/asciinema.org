@@ -11,7 +11,7 @@ module AsciicastsHelper
     if custom_renderer = params[:renderer]
       renderer_class = "AsciiIo.Renderer.#{custom_renderer.camelize}"
     else
-      renderer_class = "AsciiIo.Renderer.Pre"
+      renderer_class = "AsciiIo.Renderer.PreInnerHtml"
     end
 
     render :partial => 'asciicasts/player', :locals => {

@@ -1,22 +1,19 @@
 class AsciiIo.Renderer.PreReuse extends AsciiIo.Renderer.Pre
 
   createChildElements: ->
-    i = 0
+    super
 
+    i = 0
     while i < @lines
-      row = $("<span class=\"line\">")
+      line = @$lines.eq(i)
 
       j = 0
       while j < @cols
         cell = $('<span>')
-        row.append cell
+        line.append cell
         j++
 
-      @$el.append row
-      @$el.append "\n"
       i++
-
-    @$lines = @$('.line')
 
   renderLine: (n, fragments, cursorX) ->
     html = []
@@ -47,3 +44,7 @@ class AsciiIo.Renderer.PreReuse extends AsciiIo.Renderer.Pre
     while i < @cols
       spans[i].innerHTML = ''
       i++
+
+  blinkCursor: ->
+
+  resetCursorState: ->
