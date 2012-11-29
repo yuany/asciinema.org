@@ -21,7 +21,16 @@ class AsciiIo.AnsiInterpreter
     @commands.push arguments
 
   handleData: (data) ->
-    if data.match(/^\x1b[\x00-\x1f]/)
+    if match = data.match(/^([\x20-\x7e]|[\xe2-\xe8]..|[\xc2-\xc5].|[\xa1-\xfe])+/)
+      @handlePrintableCharacters(match[0])
+      return match[0].length
+
+    else if match = data.match(/^(?:\x1b\x5b|\x9b)([\x30-\x3f]*?)[\x20-\x2f]*?[\x40-\x7e]/)
+      # Control sequences
+      @handleControlSequence(match[0], match[1], match)
+      return match[0].length
+
+    else if data.match(/^\x1b[\x00-\x1f]/)
       @handleControlCharacter(data[1])
       return 2
 
@@ -31,11 +40,6 @@ class AsciiIo.AnsiInterpreter
 
     else if match = data.match(/^(\x1b[PX_^]|[\x90\x98\x9e\x9f]).*?(\x1b\\|\x9c)/)
       # DCS/SOS/PM/APC seq
-      return match[0].length
-
-    else if match = data.match(/^(?:\x1b\x5b|\x9b)([\x30-\x3f]*?)[\x20-\x2f]*?[\x40-\x7e]/)
-      # Control sequences
-      @handleControlSequence(match[0], match[1], match)
       return match[0].length
 
     else if match = data.match(/^\x1b[\x20-\x2f]*?[\x30-\x3f]/)
@@ -54,10 +58,6 @@ class AsciiIo.AnsiInterpreter
     else if data.match(/^[\x00-\x1a\x1c-\x1f]/) # excluding \x1b "ESC"
       @handleControlCharacter(data[0])
       return 1
-
-    else if match = data.match(/^([\x20-\x7e]|[\xe2-\xe8]..|[\xc2-\xc5].|[\xa1-\xfe])+/)
-      @handlePrintableCharacters(match[0])
-      return match[0].length
 
     else if data[0] is "\x7f"
       # DELETE, always and everywhere ignored
