@@ -28,7 +28,7 @@ class AsciiIo.Renderer.PreReuse extends AsciiIo.Renderer.Pre
 
       t = @escape(text)
 
-      spans[i].innerHTML = t
+      spans[i].innerText = t
 
       if brush
         brush = AsciiIo.Brush.create brush
