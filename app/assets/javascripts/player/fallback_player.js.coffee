@@ -27,11 +27,11 @@ class AsciiIo.FallbackPlayer extends AsciiIo.AbstractPlayer
 
       @movie.preprocess()
 
-      @movie.on 'data', (frameNo, frameData) =>
+      @movie.on 'data', (frameData, frameNo) =>
         state = @states[frameNo]
         @movie.trigger 'render', state
     else
-      @movie.on 'data', (frameNo, frameData) =>
+      @movie.on 'data', (frameData, frameNo) =>
         @vt.feed frameData
         state = @vt.state()
         @vt.clearChanges()

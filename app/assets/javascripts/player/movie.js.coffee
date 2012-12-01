@@ -208,7 +208,7 @@ class AsciiIo.Movie
     [delay, count] = frame
 
     frameData = @data().slice(@dataIndex, @dataIndex + count)
-    @trigger 'data', @frameNo, frameData
+    @trigger 'data', frameData, @frameNo
 
     @frameNo += 1
     @dataIndex += count
