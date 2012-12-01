@@ -29,8 +29,6 @@ File.open('stdout.time', 'w') do |f|
   end
 end
 
-system "bzip2 stdout.time && mv stdout.time.bz2 stdout.time"
-
 File.open('meta.json', 'w') do |f|
   json = {
     :duration => data['duration'],
