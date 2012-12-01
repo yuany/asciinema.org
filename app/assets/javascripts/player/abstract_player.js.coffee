@@ -34,11 +34,8 @@ class AsciiIo.AbstractPlayer
     @model.fetch success: @onModelFetched
 
   onModelFetched: =>
-    data = @model.get('escaped_stdout_data')
-    unpacker = new AsciiIo.DataUnpacker
-    unpacker.unpack data, @onModelDataUnpacked
-
-  onModelDataUnpacked: (data) =>
+    base64data = @model.get('escaped_stdout_data')
+    data = atob base64data
     @model.set stdout_data: data
     @onModelReady()
 
