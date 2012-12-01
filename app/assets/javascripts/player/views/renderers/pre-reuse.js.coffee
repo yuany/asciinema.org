@@ -26,9 +26,7 @@ class AsciiIo.Renderer.PreReuse extends AsciiIo.Renderer.Pre
     for fragment in fragments
       [text, brush] = fragment
 
-      t = @escape(text)
-
-      spans[i].innerText = t
+      spans[i].innerText = text
 
       if brush
         brush = AsciiIo.Brush.create brush
