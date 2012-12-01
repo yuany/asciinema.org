@@ -24,8 +24,8 @@ addEventListener 'message', (e) =>
     postMessage evt: event, src: 'vt', args: args
 
   movie = new AsciiIo.Movie(
-    timing: options.timing
-    stdout_data: options.stdout_data
+    stdout_timing: options.stdout_timing
+    stdout: options.stdout
     duration: options.duration
     speed: options.speed
     benchmark: options.benchmark

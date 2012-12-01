@@ -22,8 +22,8 @@ class AsciiIo.AbstractPlayer
     throw 'not implemented'
 
   movieOptions: ->
-    timing: @model.get 'stdout_timing_data'
-    stdout_data: @model.get 'stdout_data'
+    stdout_timing: @model.get 'stdout_timing'
+    stdout: @model.get 'stdout'
     duration: @model.get 'duration'
     speed: @options.speed
     benchmark: @options.benchmark
@@ -31,13 +31,9 @@ class AsciiIo.AbstractPlayer
     lines: @options.lines
 
   fetchModel: ->
-    @model.fetch success: @onModelFetched
+    @model.fetch success: @onModelReady
 
-  onModelFetched: =>
-    @model.set stdout_data: @model.get('escaped_stdout_data')
-    @onModelReady()
-
-  onModelReady: ->
+  onModelReady: =>
     @createVT()
     @createMovie()
     @bindEvents()

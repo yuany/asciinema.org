@@ -18,11 +18,11 @@ FileUtils.mkdir_p(dir)
 Dir.chdir(dir)
 
 File.open('stdout', 'wb') do |f|
-  f.write data['escaped_stdout_data']
+  f.write data['stdout']
 end
 
 File.open('stdout.time', 'w') do |f|
-  data['stdout_timing_data'].each do |line|
+  data['stdout_timing'].each do |line|
     f.puts line.join(' ')
   end
 end

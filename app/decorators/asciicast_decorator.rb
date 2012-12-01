@@ -11,25 +11,25 @@ class AsciicastDecorator < ApplicationDecorator
 
   def as_json(*args)
     data = model.as_json(*args)
-    data['escaped_stdout_data'] = escaped_stdout_data
-    data['stdout_timing_data'], saved_time = stdout_timing_data
+    data['stdout'] = stdout
+    data['stdout_timing'], saved_time = stdout_timing
     data['duration'] = data['duration'] - saved_time
 
     data
   end
 
-  def escaped_stdout_data
-    if data = stdout.read
+  def stdout
+    if data = asciicast.stdout.read
       data
     else
       nil
     end
   end
 
-  def stdout_timing_data
+  def stdout_timing
     saved_time = 0
 
-    if file = stdout_timing.file
+    if file = asciicast.stdout_timing.file
       data = file.read.lines.map do |line|
         delay, n = line.strip.split
         delay = delay.to_f

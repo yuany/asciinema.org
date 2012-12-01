@@ -23,10 +23,10 @@ class AsciiIo.Movie
     (new Date()).getTime()
 
   timing: ->
-    @options.timing
+    @options.stdout_timing
 
   data: ->
-    @options.stdout_data
+    @options.stdout
 
   play: ->
     return if @isPlaying()
