@@ -32,14 +32,8 @@ class AsciicastDecorator < ApplicationDecorator
     saved_time = 0
 
     if file = stdout_timing.file
-      f = IO.popen "bzip2 -d", "r+"
-      f.write file.read
-      f.close_write
-      lines = f.readlines
-      f.close
-
-      data = lines.map do |line|
-        delay, n = line.split
+      data = file.read.lines.map do |line|
+        delay, n = line.strip.split
         delay = delay.to_f
 
         if time_compression && delay > MAX_DELAY
