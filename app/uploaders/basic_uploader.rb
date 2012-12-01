@@ -21,12 +21,14 @@ class BasicUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
+  process :bunzip
+
+  def bunzip
+    return unless is_bzip2?
+
+    system "bunzip2 #{current_path}"
+    File.rename("#{current_path}.out", current_path)
+  end
 
   # Create different versions of your uploaded files:
   # version :thumb do
@@ -45,5 +47,13 @@ class BasicUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  private
+
+  def is_bzip2?
+    puts 'is_bzip2?'
+    mime_type = `file -i -b #{current_path}`
+    mime_type =~ %r{application/x-bzip2}
+  end
 
 end
