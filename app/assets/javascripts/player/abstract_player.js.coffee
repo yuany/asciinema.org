@@ -34,9 +34,7 @@ class AsciiIo.AbstractPlayer
     @model.fetch success: @onModelFetched
 
   onModelFetched: =>
-    base64data = @model.get('escaped_stdout_data')
-    data = atob base64data
-    @model.set stdout_data: data
+    @model.set stdout_data: @model.get('escaped_stdout_data')
     @onModelReady()
 
   onModelReady: ->

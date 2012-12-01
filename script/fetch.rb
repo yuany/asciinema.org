@@ -3,7 +3,6 @@
 require 'open-uri'
 require 'json'
 require 'fileutils'
-require 'base64'
 
 id = ARGV[0]
 
@@ -19,8 +18,7 @@ FileUtils.mkdir_p(dir)
 Dir.chdir(dir)
 
 File.open('stdout', 'wb') do |f|
-  stdout_data = Base64.decode64(data['escaped_stdout_data'])
-  f.write stdout_data
+  f.write data['escaped_stdout_data']
 end
 
 File.open('stdout.time', 'w') do |f|
