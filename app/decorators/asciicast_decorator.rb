@@ -19,11 +19,7 @@ class AsciicastDecorator < ApplicationDecorator
   end
 
   def stdout
-    if data = asciicast.stdout.read
-      data
-    else
-      nil
-    end
+    asciicast.stdout.try(:read)
   end
 
   def stdout_timing
