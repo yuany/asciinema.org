@@ -5,6 +5,20 @@ class AsciicastDecorator < ApplicationDecorator
   THUMBNAIL_HEIGHT = 10
   MAX_DELAY = 5.0
 
+  class EscapedStdoutString
+    def initialize(string)
+      @string = string
+    end
+
+    def as_json(*args)
+      self
+    end
+
+    def encode_json(*args)
+      @string.bytes.map { |c| c.chr(Encoding::UTF_8) }.join.to_json
+    end
+  end
+
   def user
     @user ||= UserDecorator.new(asciicast.user)
   end
@@ -19,7 +33,7 @@ class AsciicastDecorator < ApplicationDecorator
   end
 
   def stdout
-    asciicast.stdout.try(:read)
+    EscapedStdoutString.new(asciicast.stdout.try(:read).to_s)
   end
 
   def stdout_timing

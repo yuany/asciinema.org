@@ -44,9 +44,9 @@ class AsciicastsController < ApplicationController
       end
 
       format.json do
-        if stale? @asciicast
+        # if stale? @asciicast
           respond_with @asciicast
-        end
+        # end
       end
     end
   end
