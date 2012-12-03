@@ -24,7 +24,7 @@ class BasicUploader < CarrierWave::Uploader::Base
   process :bunzip
 
   def bunzip
-    return unless is_bzip2?
+    return unless is_bzip2? # https://github.com/jnicklas/carrierwave/wiki/How-to%3A-Do-conditional-processing
 
     system "bunzip2 #{current_path}"
     File.rename("#{current_path}.out", current_path)
