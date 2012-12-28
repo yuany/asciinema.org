@@ -1,3 +1,5 @@
+require 'carrierwave'
+
 CarrierWave.configure do |config|
   if CFG['CARRIERWAVE_STORAGE'] == :fog
     config.storage = :fog

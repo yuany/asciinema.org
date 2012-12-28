@@ -34,6 +34,7 @@ AsciiIo::Application.routes.draw do
 
   root :to => 'home#show'
 
+  require 'jasmine-rails'
   mount JasmineRails::Engine => "/specs" unless Rails.env.production?
 
   match '*a', :to => 'application#not_found'

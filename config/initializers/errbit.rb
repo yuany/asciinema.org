@@ -1,3 +1,5 @@
+require 'airbrake'
+
 Airbrake.configure do |config|
   unless CFG['AIRBRAKE_API_KEY'].blank?
     config.api_key     = CFG['AIRBRAKE_API_KEY']
