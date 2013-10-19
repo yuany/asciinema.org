@@ -12,6 +12,7 @@
 //= require backbone-min
 //= require jquery.timeago
 //= require backbone/asciinema
+//= require persona
 
 $(function() {
   $('abbr.timeago').timeago();
