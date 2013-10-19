@@ -3,15 +3,20 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    @user = user_from_omniauth
+    user = find_user
 
-    if @user.persisted?
-      self.current_user = @user
+    if user
+      self.current_user = user
       redirect_back_or_to root_url, :notice => "Logged in!"
     else
-      store_sensitive_user_data_in_session
-      redirect_to new_user_path
+      store_email_in_session
+      redirect_to transition_session_path
     end
+  end
+
+  def transition
+    @user = User.new
+    @user.email = session[:new_user_email]
   end
 
   def destroy
@@ -25,35 +30,17 @@ class SessionsController < ApplicationController
 
   private
 
-  def store_sensitive_user_data_in_session
-    session[:new_user] = {
-      :provider   => @user.provider,
-      :uid        => @user.uid,
-      :avatar_url => @user.avatar_url
-    }
+  def store_email_in_session
+    session[:new_user_email] = omniauth['info']['email']
   end
 
-  def user_from_omniauth
-    omniauth = request.env['omniauth.auth']
-    find_user(omniauth) || build_user(omniauth)
+  def find_user
+    email = omniauth['info']['email']
+    User.where(email: email).first
   end
 
-  def find_user(omniauth)
-    query = { :provider => omniauth['provider'], :uid => omniauth['uid'].to_s }
-
-    User.where(query).first
-  end
-
-  def build_user(omniauth)
-    user = User.new
-    user.provider   = omniauth['provider']
-    user.uid        = omniauth['uid']
-    user.nickname   = omniauth['info']['nickname']
-    user.name       = omniauth['info']['name'] unless user.provider == 'browser_id'
-    user.email      = omniauth["info"]["email"]
-    user.avatar_url = OmniAuthHelper.get_avatar_url(omniauth)
-
-    user
+  def omniauth
+    request.env['omniauth.auth']
   end
 
 end

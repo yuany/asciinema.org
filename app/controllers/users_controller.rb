@@ -47,16 +47,11 @@ class UsersController < ApplicationController
   private
 
   def load_sensitive_user_data_from_session
-    if session[:new_user]
-      @user.provider   = session[:new_user][:provider]
-      @user.uid        = session[:new_user][:uid]
-      @user.avatar_url = session[:new_user][:avatar_url]
-      @user.email      = @user.uid if @user.provider == 'browser_id'
-    end
+    @user.email = session[:new_user_email] if session[:new_user_email]
   end
 
   def clear_sensitive_session_user_data
-    session.delete(:new_user)
+    session.delete(:new_user_email)
   end
 
 end

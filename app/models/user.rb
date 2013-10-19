@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :likes, :dependent => :destroy
 
-  validates :provider, :presence => true
-  validates :uid, :presence => true
   validates :nickname, :presence => true
 
   validates_uniqueness_of \
